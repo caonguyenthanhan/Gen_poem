@@ -42,35 +42,35 @@ export default function PoemGenerator() {
 
     return (
         <div className="max-w-4xl mx-auto p-6">
-            <h1 className="text-3xl font-bold text-center mb-8">Vietnamese Poem Generator</h1>
+            <h1 className="text-3xl font-bold text-center mb-8">Trình Tạo Thơ Tiếng Việt</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Input Section */}
                 <div className="border rounded-lg p-6 shadow-sm">
-                    <h2 className="text-xl font-semibold mb-4">Input Parameters</h2>
-                    <p className="text-sm text-gray-600 mb-4">Enter a prompt and adjust generation parameters</p>
+                    <h2 className="text-xl font-semibold mb-4">Tham Số Đầu Vào</h2>
+                    <p className="text-sm text-gray-600 mb-4">Nhập chủ đề và điều chỉnh tham số sinh thơ</p>
 
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="prompt" className="block text-sm font-medium mb-1">
-                                Prompt
+                                Chủ đề
                             </label>
                             <input
                                 id="prompt"
                                 type="text"
                                 value={prompt}
                                 onChange={(e) => setPrompt(e.target.value)}
-                                placeholder="Enter your prompt..."
+                                placeholder="Nhập chủ đề hoặc vài từ gợi ý..."
                                 className="w-full p-2 border rounded-md"
                             />
                             <p className="text-sm text-gray-500 mt-1">
-                                Enter a few words to start your poem (e.g., "Học học nữa học mãi")
+                                Nhập một vài từ để bắt đầu bài thơ (ví dụ: "Học học nữa học mãi")
                             </p>
                         </div>
 
                         <div>
                             <label htmlFor="temperature" className="block text-sm font-medium mb-1">
-                                Temperature: {temperature}
+                                Độ sáng tạo: {temperature}
                             </label>
                             <input
                                 id="temperature"
@@ -83,13 +83,13 @@ export default function PoemGenerator() {
                                 className="w-full"
                             />
                             <p className="text-sm text-gray-500 mt-1">
-                                Controls randomness: Lower values are more deterministic, higher values more creative
+                                Điều chỉnh độ ngẫu nhiên: Giá trị thấp cho kết quả logic, giá trị cao cho thơ sáng tạo hơn
                             </p>
                         </div>
 
                         <div>
                             <label htmlFor="maxLength" className="block text-sm font-medium mb-1">
-                                Max Length: {maxLength}
+                                Độ dài tối đa: {maxLength}
                             </label>
                             <input
                                 id="maxLength"
@@ -101,7 +101,7 @@ export default function PoemGenerator() {
                                 onChange={(e) => setMaxLength(Number.parseInt(e.target.value))}
                                 className="w-full"
                             />
-                            <p className="text-sm text-gray-500 mt-1">Maximum number of tokens to generate</p>
+                            <p className="text-sm text-gray-500 mt-1">Số lượng từ tối đa của bài thơ</p>
                         </div>
                     </div>
 
@@ -110,14 +110,14 @@ export default function PoemGenerator() {
                         disabled={isGenerating}
                         className="w-full mt-6 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-300"
                     >
-                        {isGenerating ? "Generating..." : "Generate Poem"}
+                        {isGenerating ? "Đang tạo thơ..." : "Tạo Thơ"}
                     </button>
                 </div>
 
                 {/* Output Section */}
                 <div className="border rounded-lg p-6 shadow-sm">
-                    <h2 className="text-xl font-semibold mb-4">Generated Poem</h2>
-                    <p className="text-sm text-gray-600 mb-4">Your Vietnamese five-word poem will appear here</p>
+                    <h2 className="text-xl font-semibold mb-4">Kết Quả Bài Thơ</h2>
+                    <p className="text-sm text-gray-600 mb-4">Bài thơ tiếng Việt của bạn sẽ xuất hiện ở đây</p>
 
                     <div className="bg-gray-100 p-4 rounded-md min-h-[300px] whitespace-pre-line">
                         {generatedPoem ? (
@@ -127,7 +127,7 @@ export default function PoemGenerator() {
                                 </p>
                             ))
                         ) : (
-                            <p className="text-gray-500 italic">Your poem will appear here after generation...</p>
+                            <p className="text-gray-500 italic">Bài thơ sẽ xuất hiện sau khi bạn nhấn "Tạo Thơ"...</p>
                         )}
                     </div>
 
@@ -137,19 +137,19 @@ export default function PoemGenerator() {
                             disabled={!generatedPoem || isGenerating}
                             className="border border-gray-300 py-2 px-4 rounded-md hover:bg-gray-100 disabled:opacity-50"
                         >
-                            Clear
+                            Xóa
                         </button>
                         <button
                             onClick={() => {
                                 if (generatedPoem) {
                                     navigator.clipboard.writeText(generatedPoem);
-                                    alert("Poem copied to clipboard!");
+                                    alert("Đã sao chép bài thơ vào clipboard!");
                                 }
                             }}
                             disabled={!generatedPoem || isGenerating}
                             className="border border-gray-300 py-2 px-4 rounded-md hover:bg-gray-100 disabled:opacity-50"
                         >
-                            Copy to Clipboard
+                            Sao chép
                         </button>
                     </div>
                 </div>

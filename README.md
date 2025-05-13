@@ -34,7 +34,7 @@
 
 ### Tải Model AI
 1. Tải thư mục `vietnamese_poem_generator` từ link sau:
-   [LINK_DRIVE_MODEL]
+   [https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link](https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link)
 2. Giải nén và đặt thư mục `vietnamese_poem_generator` vào thư mục gốc của dự án
 
 ### Cài đặt Frontend
@@ -124,6 +124,14 @@ MIT License
 
 ## Tác giả
 
-Cao Nguyễn Thành An
-- Email: caonguyenthanhan.aaa@gmail.com
-- GitHub: [@caonguyenthanhan](https://github.com/caonguyenthanhan)
+- Cao Nguyễn Thành An  
+  Email: caonguyenthanhan.aaa@gmail.com  
+  GitHub: [@caonguyenthanhan](https://github.com/caonguyenthanhan)
+
+- Cao Thọ Phú Thịnh  
+  Email: caothophuthinh@gmail.com  
+  GitHub: *(để trống)*
+
+- Trịnh Ngọc Anh Tuyên  
+  Email: tuyen07vn@gmail.com  
+  GitHub: [tnatuyen](https://github.com/tnatuyen)
