@@ -9,35 +9,54 @@
 - Hỗ trợ chế độ sáng/tối
 - API backend với Flask và mô hình AI
 - Tùy chỉnh nhiệt độ và độ dài của bài thơ
+- Docker containerization cho dễ dàng triển khai
 
 ## Công nghệ sử dụng
 
 ### Frontend
-- Next.js 15.1.0
-- React 19
+- Next.js 14.0.4
+- React 18
 - Tailwind CSS
 - Radix UI Components
 - TypeScript
 
 ### Backend
-- Flask
+- Flask 2.3.3
 - Transformers (GPT-2)
 - PyTorch
 - Flask-CORS
+- Gunicorn
 
 ## Cài đặt và Chạy
 
-### Yêu cầu hệ thống
-- Node.js (phiên bản mới nhất)
+### Cách 1: Sử dụng Docker (Khuyến nghị)
+
+1. Cài đặt Docker và Docker Compose
+2. Clone repository:
+```bash
+git clone https://github.com/yourusername/gen-poem.git
+cd gen-poem
+```
+
+3. Tải thư mục `vietnamese_poem_generator` từ link sau:
+   [https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link](https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link)
+4. Giải nén và đặt thư mục `vietnamese_poem_generator` vào thư mục gốc của dự án
+
+5. Chạy ứng dụng:
+```bash
+docker-compose up --build
+```
+
+6. Truy cập ứng dụng tại `http://localhost:3000`
+
+### Cách 2: Cài đặt thủ công
+
+#### Yêu cầu hệ thống
+- Node.js 18+
 - Python 3.8+
 - npm hoặc yarn
 
-### Tải Model AI
-1. Tải thư mục `vietnamese_poem_generator` từ link sau:
-   [https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link](https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link)
-2. Giải nén và đặt thư mục `vietnamese_poem_generator` vào thư mục gốc của dự án
-
-### Cài đặt Frontend
+#### Cài đặt Frontend
 ```bash
 # Cài đặt dependencies
 npm install
@@ -46,13 +65,18 @@ npm install
 npm run dev
 ```
 
-### Cài đặt Backend
+#### Cài đặt Backend
 ```bash
 # Tạo và kích hoạt môi trường ảo
-python setup_env.py
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+.\venv\Scripts\activate   # Windows
+
+# Cài đặt dependencies
+pip install -r requirements.txt
 
 # Chạy API server
-npm run server
+python poem_api.py
 ```
 
 ## Cấu trúc dự án
@@ -68,7 +92,10 @@ gen-poem/
 ├── vietnamese_poem_generator/  # Mô hình AI
 ├── poem_api.py           # Flask API server
 ├── requirements.txt      # Python dependencies
-└── package.json         # Node.js dependencies
+├── package.json         # Node.js dependencies
+├── Dockerfile.frontend  # Frontend Dockerfile
+├── Dockerfile.backend   # Backend Dockerfile
+└── docker-compose.yml   # Docker Compose config
 ```
 
 ## Sử dụng
@@ -117,6 +144,26 @@ npm run server
 ```bash
 npm run lint
 ```
+
+## Triển khai
+
+### Docker
+```bash
+# Build và chạy containers
+docker-compose up --build
+
+# Chạy ở chế độ detached
+docker-compose up -d
+
+# Dừng containers
+docker-compose down
+```
+
+### GitHub Pages
+1. Fork repository
+2. Enable GitHub Pages trong repository settings
+3. Chọn branch main và thư mục root
+4. Truy cập ứng dụng tại `https://yourusername.github.io/gen-poem`
 
 ## Giấy phép
 
