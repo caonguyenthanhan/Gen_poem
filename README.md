@@ -40,9 +40,11 @@ cd gen-poem
 
 3. Tải thư mục `vietnamese_poem_generator` từ link sau:
    [https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link](https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link)
-4. Giải nén và đặt thư mục `vietnamese_poem_generator` vào thư mục gốc của dự án
+   hoặc
+   [https://drive.google.com/drive/folders/1-hDOBoKLDCJoSCb3Of5PMpf36NI76gmd?usp=sharing](https://drive.google.com/drive/folders/1-hDOBoKLDCJoSCb3Of5PMpf36NI76gmd?usp=sharing)
+5. Giải nén và đặt thư mục `vietnamese_poem_generator` vào thư mục gốc của dự án
 
-5. Chạy ứng dụng:
+6. Chạy ứng dụng:
 ```bash
 docker-compose up --build
 ```
