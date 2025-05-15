@@ -1,34 +1,21 @@
-import os
 import subprocess
 import sys
-from pathlib import Path
+import os
+import venv
 
 def setup_virtual_env():
-    venv_name = "venv"
+    if not os.path.exists('venv'):
+        print('Creating virtual environment...')
+        venv.create('venv', with_pip=True)
     
-    if not os.path.exists(venv_name):
-        print("Creating virtual environment...")
-        subprocess.run([sys.executable, "-m", "venv", venv_name], check=True)
-    
-    if os.name == "nt":  # Windows
-        python_path = os.path.join(venv_name, "Scripts", "python.exe")
-        pip_path = os.path.join(venv_name, "Scripts", "pip.exe")
-    else:  # Unix/Linux/MacOS
-        python_path = os.path.join(venv_name, "bin", "python")
-        pip_path = os.path.join(venv_name, "bin", "pip")
-    
-    print("Installing requirements...")
-    subprocess.run([pip_path, "install", "-r", "requirements.txt"], check=True)
-    
-    print("\nVirtual environment setup complete!")
-    print(f"\nTo activate the virtual environment:")
-    if os.name == "nt":
-        print(f"    {venv_name}\\Scripts\\activate")
+    if sys.platform == 'win32':
+        pip_path = os.path.join('venv', 'Scripts', 'pip')
     else:
-        print(f"    source {venv_name}/bin/activate")
+        pip_path = os.path.join('venv', 'bin', 'pip')
     
-    print("\nTo run the API server:")
-    print("    python poem_api.py")
+    print('Installing requirements...')
+    subprocess.check_call([pip_path, 'install', '-r', 'requirements.txt'])
+    print('Setup completed successfully!')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     setup_virtual_env() 

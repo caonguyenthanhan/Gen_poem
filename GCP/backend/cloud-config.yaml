@@ -1,0 +1,28 @@
+name: poem-backend-vm
+machineType: e2-medium
+zone: asia-southeast1-a
+tags:
+  - http-server
+  - https-server
+metadata:
+  startup-script: |
+    #!/bin/bash
+    apt-get update
+    apt-get install -y docker.io
+    systemctl start docker
+    systemctl enable docker
+    gcloud auth configure-docker
+    docker pull gcr.io/$PROJECT_ID/poem-backend:latest
+    docker run -d -p 8080:8080 \
+      -e GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json \
+      -e MODEL_BUCKET=gpt2_viet_poem_final_pytorch \
+      gcr.io/$PROJECT_ID/poem-backend:latest
+networkInterfaces:
+  - network: default
+    accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+serviceAccounts:
+  - email: default
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform 

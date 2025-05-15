@@ -1,184 +1,141 @@
-# Gen Poem - Ứng dụng Tạo Thơ Việt Nam bằng AI
+# Vietnamese Poem Generator
 
-Ứng dụng web tạo thơ Việt Nam tự động sử dụng mô hình GPT-2 được huấn luyện đặc biệt cho ngôn ngữ tiếng Việt.
+Ứng dụng tạo thơ tiếng Việt tự động sử dụng mô hình ngôn ngữ GPT-2.
 
-## Tính năng chính
+## Tổng quan
 
-- Tạo thơ Việt Nam tự động dựa trên prompt người dùng
-- Giao diện người dùng hiện đại với Next.js và Tailwind CSS
-- Hỗ trợ chế độ sáng/tối
-- API backend với Flask và mô hình AI
-- Tùy chỉnh nhiệt độ và độ dài của bài thơ
-- Docker containerization cho dễ dàng triển khai
+Dự án này sử dụng mô hình GPT-2 được fine-tune trên tập dữ liệu thơ tiếng Việt để tạo ra những bài thơ tự động. Ứng dụng bao gồm:
+- Backend API (Flask) xử lý logic tạo thơ
+- Frontend (Next.js) cung cấp giao diện người dùng
+- Mô hình ML được lưu trữ trên Google Cloud Storage
 
-## Công nghệ sử dụng
+## Nguồn dữ liệu
+Dữ liệu huấn luyện được thu thập từ [Thi Viện](https://www.thivien.net/) - một kho thơ Việt Nam phong phú với hàng nghìn bài thơ từ các tác giả nổi tiếng.
 
-### Frontend
-- Next.js 14.0.4
-- React 18
-- Tailwind CSS
-- Radix UI Components
-- TypeScript
+## Liên kết Tài nguyên Đồ án
 
-### Backend
-- Flask 2.3.3
-- Transformers (GPT-2)
-- PyTorch
-- Flask-CORS
-- Gunicorn
+### 1. Mã nguồn GitHub
+- Repository chính: https://github.com/caonguyenthanhan/Gen_poem
+- Repository triển khai: https://github.com/caonguyenthanhan/Gen_poem_deploy
+- Tải dự án (Google Drive): [Link sẽ được cập nhật]
+
+### 2. Google Colab Notebook
+- Notebook huấn luyện: https://colab.research.google.com/drive/1JKyXc71GE8skzc6darfMvDIVFN1S0ncK?usp=sharing
+- Notebook thử nghiệm: https://colab.research.google.com/drive/1bXXXHiJfC7Nlb5VgIydmbg00xGfeVcoL?usp=sharing
+
+### 3. Demo trực tuyến
+- Frontend: https://poem-frontend-service-1072112715772.asia-southeast1.run.app/
+- API: https://poem-backend-service-1072112715772.asia-southeast1.run.app/
 
 ## Cài đặt và Chạy
 
-### Cách 1: Sử dụng Docker (Khuyến nghị)
-
-1. Cài đặt Docker và Docker Compose
-2. Clone repository:
-```bash
-git clone https://github.com/yourusername/gen-poem.git
-cd gen-poem
-```
-
-3. Tải thư mục `vietnamese_poem_generator` từ link sau:
-   [https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link](https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link)
-4. Giải nén và đặt thư mục `vietnamese_poem_generator` vào thư mục gốc của dự án
-
-5. Chạy ứng dụng:
-```bash
-docker-compose up --build
-```
-
-6. Truy cập ứng dụng tại `http://localhost:3000`
-
-### Cách 2: Cài đặt thủ công
-
-#### Yêu cầu hệ thống
+### Yêu cầu hệ thống
+- Python 3.9+
 - Node.js 18+
-- Python 3.8+
-- npm hoặc yarn
+- Docker và Docker Compose
+- Google Cloud SDK (cho triển khai)
 
-#### Cài đặt Frontend
+### Cài đặt cục bộ
+
+1. Clone repository:
 ```bash
-# Cài đặt dependencies
-npm install
-
-# Chạy development server
-npm run dev
+git clone https://github.com/caonguyenthanhan/Gen_poem.git
+cd Gen_poem
 ```
 
-#### Cài đặt Backend
+2. Cài đặt dependencies:
 ```bash
-# Tạo và kích hoạt môi trường ảo
+# Backend
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 .\venv\Scripts\activate   # Windows
-
-# Cài đặt dependencies
 pip install -r requirements.txt
 
-# Chạy API server
-python poem_api.py
+# Frontend
+npm install
+```
+
+3. Chạy với Docker Compose:
+```bash
+cd GCP
+docker-compose up --build
+```
+
+4. Truy cập ứng dụng:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8080
+
+## Triển khai
+
+### 1. Triển khai cục bộ (Docker Compose)
+```bash
+cd GCP
+docker-compose up --build
+```
+
+### 2. Triển khai lên Google Cloud Platform
+Xem hướng dẫn chi tiết trong thư mục [GCP/deployment-guide.md](GCP/deployment-guide.md)
+
+### 3. Triển khai với Terraform
+```bash
+cd GCP/terraform
+terraform init
+terraform plan
+terraform apply
 ```
 
 ## Cấu trúc dự án
-
 ```
 gen-poem/
-├── app/                    # Next.js frontend
-│   ├── api/               # API routes
-│   ├── components/        # React components
-│   └── page.tsx          # Trang chủ
-├── lib/                   # Utility functions
-├── public/               # Static assets
-├── vietnamese_poem_generator/  # Mô hình AI
-├── poem_api.py           # Flask API server
-├── requirements.txt      # Python dependencies
-├── package.json         # Node.js dependencies
-├── Dockerfile.frontend  # Frontend Dockerfile
-├── Dockerfile.backend   # Backend Dockerfile
-└── docker-compose.yml   # Docker Compose config
+├── backend/                 # Flask API
+│   ├── poem_api.py         # API endpoints
+│   └── requirements.txt    # Python dependencies
+├── frontend/               # Next.js frontend
+│   ├── pages/             # React components
+│   └── package.json       # Node.js dependencies
+├── GCP/                    # Deployment configs
+│   ├── backend/           # Backend deployment
+│   ├── frontend/          # Frontend deployment
+│   └── terraform/         # IaC configs
+└── memory-bank/           # Project documentation
 ```
-
-## Sử dụng
-
-1. Truy cập ứng dụng tại `http://localhost:3000`
-2. Nhập prompt (gợi ý) cho bài thơ
-3. Điều chỉnh các tham số:
-   - Nhiệt độ: Kiểm soát độ sáng tạo (0.1 - 1.0)
-   - Độ dài: Số từ tối đa trong bài thơ
-4. Nhấn "Tạo thơ" để tạo bài thơ mới
 
 ## API Endpoints
 
 ### POST /api/generate
-Tạo thơ mới dựa trên prompt
-
-**Request Body:**
+Tạo thơ mới
 ```json
 {
-  "prompt": "string",
-  "temperature": number,
-  "maxLength": number
+  "prompt": "Chủ đề thơ",
+  "max_length": 100,
+  "temperature": 0.7
 }
 ```
 
-**Response:**
-```json
-{
-  "poem": "string"
-}
-```
+### GET /api/health
+Kiểm tra trạng thái API
 
-## Phát triển
+## Đóng góp
 
-### Frontend Development
-```bash
-npm run dev
-```
-
-### Backend Development
-```bash
-npm run server
-```
-
-### Linting
-```bash
-npm run lint
-```
-
-## Triển khai
-
-### Docker
-```bash
-# Build và chạy containers
-docker-compose up --build
-
-# Chạy ở chế độ detached
-docker-compose up -d
-
-# Dừng containers
-docker-compose down
-```
-
-### GitHub Pages
 1. Fork repository
-2. Enable GitHub Pages trong repository settings
-3. Chọn branch main và thư mục root
-4. Truy cập ứng dụng tại `https://yourusername.github.io/gen-poem`
+2. Tạo branch mới (`git checkout -b feature/AmazingFeature`)
+3. Commit thay đổi (`git commit -m 'Add some AmazingFeature'`)
+4. Push lên branch (`git push origin feature/AmazingFeature`)
+5. Tạo Pull Request
 
 ## Giấy phép
 
-MIT License
+Dự án này được cấp phép theo MIT License - xem file [LICENSE](LICENSE) để biết thêm chi tiết.
 
-## Tác giả
+## Liên hệ
 
-- Cao Nguyễn Thành An  
-  Email: caonguyenthanhan.aaa@gmail.com  
-  GitHub: [@caonguyenthanhan](https://github.com/caonguyenthanhan)
+- Nguyễn Thanh An - [GitHub](https://github.com/caonguyenthanhan)
+- Email: caonguyenthanhan.aaa@gmail.com
 
-- Cao Thọ Phú Thịnh  
-  Email: caothophuthinh@gmail.com  
-  GitHub: *(để trống)*
+## Cảm ơn
 
-- Trịnh Ngọc Anh Tuyên  
-  Email: tuyen07vn@gmail.com  
-  GitHub: [tnatuyen](https://github.com/tnatuyen)
+- [GPT-2](https://github.com/openai/gpt-2) - Mô hình ngôn ngữ cơ sở
+- [Hugging Face Transformers](https://github.com/huggingface/transformers) - Thư viện ML
+- [Next.js](https://nextjs.org/) - Framework frontend
+- [Flask](https://flask.palletsprojects.com/) - Framework backend
+- [Thi Viện](https://www.thivien.net/) - Nguồn dữ liệu thơ
