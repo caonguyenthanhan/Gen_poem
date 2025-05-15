@@ -29,13 +29,37 @@ Dữ liệu huấn luyện được thu thập từ [Thi Viện](https://www.thi
 
 ## Cài đặt và Chạy
 
-### Yêu cầu hệ thống
+### Cách 1: Sử dụng Docker (Khuyến nghị)
+
+1. Cài đặt Docker và Docker Compose
+2. Clone repository:
+```bash
+git clone https://github.com/caonguyenthanhan/Gen_poem.git
+cd Gen_poem
+```
+
+3. Tải thư mục `vietnamese_poem_generator` từ link sau:
+   [https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link](https://drive.google.com/drive/folders/1aYpELDht5Pcp60UfgCkZRlF8w5bfSGqk?usp=drive_link)
+   hoặc
+   [https://drive.google.com/drive/folders/1-hDOBoKLDCJoSCb3Of5PMpf36NI76gmd?usp=sharing](https://drive.google.com/drive/folders/1-hDOBoKLDCJoSCb3Of5PMpf36NI76gmd?usp=sharing)
+
+4. Giải nén và đặt thư mục `vietnamese_poem_generator` vào thư mục gốc của dự án
+
+5. Chạy ứng dụng:
+```bash
+cd GCP
+docker-compose up --build
+```
+
+6. Truy cập ứng dụng tại `http://localhost:3000`
+
+### Cách 2: Cài đặt thủ công
+
+#### Yêu cầu hệ thống
 - Python 3.9+
 - Node.js 18+
 - Docker và Docker Compose
 - Google Cloud SDK (cho triển khai)
-
-### Cài đặt cục bộ
 
 1. Clone repository:
 ```bash
@@ -55,10 +79,13 @@ pip install -r requirements.txt
 npm install
 ```
 
-3. Chạy với Docker Compose:
+3. Chạy ứng dụng:
 ```bash
-cd GCP
-docker-compose up --build
+# Backend
+python poem_api.py
+
+# Frontend (terminal mới)
+npm run dev
 ```
 
 4. Truy cập ứng dụng:
